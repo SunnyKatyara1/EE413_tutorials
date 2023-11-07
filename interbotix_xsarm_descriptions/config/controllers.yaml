@@ -1,0 +1,32 @@
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+arm_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+    - waist
+    - shoulder
+    - elbow
+    - wrist_angle
+    - wrist_rotate
+    - gripper
+  gains:
+    waist: {p: 200.0, i: 10.0, d: 10.0, i_clamp: 1}
+    shoulder: {p: 200.0, i: 10.0, d: 10.0, i_clamp: 1}
+    elbow: {p: 200.0, i: 10.0, d: 10.0, i_clamp: 1}
+    wrist_angle: {p: 200.0, i: 10.0, d: 10.0, i_clamp: 1}
+    wrist_rotate: {p: 200.0, i: 10.0, d: 10.0, i_clamp: 1}
+    gripper: {p: 200.0, i: 10.0, d: 10.0, i_clamp: 1}
+
+
+left_finger_controller:
+  type: position_controllers/JointPositionController
+  joint: left_finger
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+
+right_finger_controller:
+  type: position_controllers/JointPositionController
+  joint: right_finger
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+

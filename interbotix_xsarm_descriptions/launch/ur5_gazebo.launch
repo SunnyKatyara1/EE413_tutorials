@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+    
+    <!-- define arguments -->
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="debug" default="false" />
+    <arg name="verbose" default="true" />
+
+    <arg name="robot_x" default="0" />
+    <arg name="robot_y" default="0" />
+    <arg name="robot_z" default="0.01" />
+
+    <!-- startup simulated WORLD -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="paused" value="$(arg paused)" />
+        <arg name="use_sim_time" value="$(arg use_sim_time)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="verbose" value="$(arg verbose)" />
+    </include>
+    <node name="spawn_table" pkg="gazebo_ros" type="spawn_model"
+      args="-file $(find interbotix_xsarm_descriptions)/urdf/model/table/model.sdf -sdf -model table -y 0 -x 0.6 -z 0"
+      output="screen" />
+
+   <param name="robot_description" textfile="$(find interbotix_xsarm_descriptions)/urdf/ur5robot.urdf" />
+   <rosparam file="$(find interbotix_xsarm_descriptions)/config/ur5_controllers.yaml" command="load"/>
+
+    <node name="ur_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param robot_description -model universal-robot-ur5" />
+    
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+      output="screen" args="joint_state_controller ur5_arm_controller finger_controller left_inner_knuckle_controller left_inner_finger_controller right_outer_knuckle_controller right_inner_knuckle_controller right_inner_finger_controller"/>
+    
+   
+
+
+</launch>
