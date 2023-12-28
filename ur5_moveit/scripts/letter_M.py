@@ -82,9 +82,8 @@ def execute_trajectory(waypoints):
 # Main Execution
 if __name__ == '__main__':
     current_pose = group.get_current_pose().pose.position
-    current_pose.y += 0.15
-    current_pose.z += 0.1
-    m_height = 0.1  # Change this to the desired height of the 'M'
+    current_pose.y += 0.1
+    m_height = 0.2  # Change this to the desired height of the 'M'
     m_width = 0.1   # Change this to the desired width of the 'M'
     while not rospy.is_shutdown():
         waypoints = m_trajectory(m_height, m_width, [current_pose.x, current_pose.y, current_pose.z])

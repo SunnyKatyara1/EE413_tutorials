@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <launch>
   <!-- Gazebo options -->
-  <arg name="gazebo_gui" default="true" doc="Start Gazebo GUI"/>
+  <arg name="world_file" default="$(find ur5_moveit)/worlds/non-prehensile.world"/>
+  <arg name="gazebo_gui" default="false" doc="Start Gazebo GUI"/>
   <arg name="paused" default="false" doc="Start Gazebo paused"/>
   <arg name="world_name" default="worlds/empty.world" doc="Gazebo world file"/>
   <arg name="world_pose" default="-x 0 -y 0 -z 0 -R 0 -P 0 -Y 0" doc="Pose to spawn the robot at"/>
@@ -9,14 +10,13 @@
 
   <!-- Start Gazebo paused to allow the controllers to pickup the initial pose -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch" pass_all_args="true">
+    <arg name="world_name" value="$(arg world_file)"/>
     <arg name="paused" value="true"/>
   </include>
 
- <node name="spawn_table" pkg="gazebo_ros" type="spawn_model"
-      args="-file $(find interbotix_xsarm_descriptions)/urdf/model/table/model.sdf -sdf -model table -y 0 -x 0.6 -z 0"
-      output="screen" />
   <!-- Set the robot urdf on the parameter server -->
   <param name="robot_description" textfile="$(find interbotix_xsarm_descriptions)/urdf/ur5robot.urdf" />
+  <rosparam file="$(find interbotix_xsarm_descriptions)/config/ur5_controllers.yaml" command="load"/>
 
   <!-- Unpause the simulation after loading the robot model -->
   <arg name="unpause" value="$(eval '' if arg('paused') else '-unpause')" />
@@ -30,7 +30,7 @@
   <include file="$(dirname)/ros_controllers.launch"/>
 
   <!-- Spawn the Gazebo ROS controllers -->
-  <node name="gazebo_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller" />
+  <node name="gazebo_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller d_finger_controller u_finger_controller left_inner_finger_controller left_finger_controller right_inner_finger_controller right_finger_controller" />
 
   <!-- Given the published joint states, publish tf for the robot links -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />

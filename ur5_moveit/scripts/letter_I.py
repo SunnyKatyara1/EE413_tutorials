@@ -72,7 +72,7 @@ def execute_trajectory(waypoints):
 # Main Execution
 if __name__ == '__main__':
     current_pose = group.get_current_pose().pose.position
-    current_pose.y += 0.15
+    current_pose.y += 0.1
     i_height = 0.2  # Change this to the desired height of the 'I'
     while not rospy.is_shutdown():
         waypoints = i_trajectory(i_height, [current_pose.x, current_pose.y, current_pose.z])

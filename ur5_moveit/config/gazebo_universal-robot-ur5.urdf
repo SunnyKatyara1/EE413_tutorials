@@ -20,6 +20,44 @@
     <!-- world -->
     <!-- Used for fixing robots 'base_link' to Gazebos 'world' -->
     <link name="world" />
+    
+    <link name="rear_camera_link">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/> <!-- Size of the camera, adjust as needed -->
+      </geometry>
+    </visual>
+  </link>
+  <joint name="rear_camera_joint" type="fixed">
+    <parent link="world"/> <!-- Or whatever link you want to attach the camera to -->
+    <child link="rear_camera_link"/>
+    <origin xyz="-0.3 0 1.5" rpy="0 0.083 0"/> <!-- Adjust position and orientation -->
+  </joint>
+  <gazebo reference="rear_camera_link">
+    <sensor type="camera" name="rear_camera_sensor">
+      <update_rate>30.0</update_rate> <!-- Camera update rate in Hz -->
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov> <!-- Field of view -->
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0</updateRate>
+        <cameraName>rear_camera</cameraName>
+        <imageTopicName>rear_camera/image_raw</imageTopicName>
+        <cameraInfoTopicName>rear_camera/camera_info</cameraInfoTopicName>
+        <frameName>rear_camera_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
     <joint name="world_base_joint" type="fixed">
         <parent link="world" />
         <child link="base_link" />

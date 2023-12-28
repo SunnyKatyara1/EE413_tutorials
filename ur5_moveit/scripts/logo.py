@@ -47,17 +47,6 @@ def generate_circle(center, radius, num_points=100):
         marker.points.append(Point(x+0.2, y, z-1.02))
     return waypoints
 
-def execute_trajectory(waypoints):
-    (plan, fraction) = group.compute_cartesian_path(
-                            waypoints,
-                            0.01,  # eef_step
-                            0.0)   # jump_threshold
-    if fraction == 1.0:
-        print("Full trajectory computed!")
-        group.execute(plan, wait=True)
-    else:
-        print("Could not compute full trajectory. Only " + str(fraction*100) + "% achieved.")
-
 if __name__ == '__main__':
     outer_radius = 0.1
     inner_radius = outer_radius / 2.0

@@ -1,0 +1,6 @@
+path: /home/sunny/Documents/data
+train: images/train
+val: images/train
+
+names:
+  0: cube

@@ -21,32 +21,27 @@ ur5_arm_controller:
 
 
 
-finger_controller:
+d_finger_controller:
   type: position_controllers/JointPositionController
   joint: finger_joint
   pid: {p: 100.0, i: 0.01, d: 10.0}
-  
-left_inner_knuckle_controller:
-  type: position_controllers/JointPositionController
-  joint: left_inner_knuckle_joint
-  pid: {p: 100.0, i: 0.01, d: 10.0}
-
-left_inner_finger_controller:
-  type: position_controllers/JointPositionController
-  joint: left_inner_finger_joint
-  pid: {p: 100.0, i: 0.01, d: 10.0}
-
-right_outer_knuckle_controller:
+u_finger_controller:
   type: position_controllers/JointPositionController
   joint: right_outer_knuckle_joint
   pid: {p: 100.0, i: 0.01, d: 10.0}
-  
-right_inner_knuckle_controller:
+left_inner_finger_controller:
+  type: position_controllers/JointPositionController
+  joint: left_inner_knuckle_joint
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+left_finger_controller:
+  type: position_controllers/JointPositionController
+  joint: left_inner_finger_joint
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+right_inner_finger_controller:
   type: position_controllers/JointPositionController
   joint: right_inner_knuckle_joint
   pid: {p: 100.0, i: 0.01, d: 10.0}
-
-right_inner_finger_controller:
+right_finger_controller:
   type: position_controllers/JointPositionController
   joint: right_inner_finger_joint
   pid: {p: 100.0, i: 0.01, d: 10.0}
