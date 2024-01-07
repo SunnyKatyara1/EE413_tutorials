@@ -405,7 +405,6 @@
     <child link="left_inner_knuckle"/>
     <axis xyz="1 0 0"/>
     <limit effort="1000" lower="-0.785398" upper="0.785398" velocity="100.0"/>
-    <mimic joint="finger_joint" multiplier="-1" offset="0"/>
   </joint>
   <transmission name="trans_left_inner_knuckle_joint">
     <type>transmission_interface/SimpleTransmission</type>
@@ -444,7 +443,6 @@
     <child link="left_inner_finger"/>
     <axis xyz="1 0 0"/>
     <limit effort="1000" lower="-0.872665" upper="0.872665" velocity="100.0"/>
-    <mimic joint="finger_joint" multiplier="1" offset="0"/>
   </joint>
     <transmission name="trans_left_inner_finger_joint">
     <type>transmission_interface/SimpleTransmission</type>
@@ -483,7 +481,6 @@
     <child link="right_outer_knuckle"/>
     <axis xyz="1 0 0"/>
     <limit effort="1000" lower="-0.785398" upper="0.785398" velocity="100.0"/>
-    <mimic joint="finger_joint" multiplier="-1" offset="0"/>
   </joint>
   <transmission name="trans_right_outer_knuckle_joint">
     <type>transmission_interface/SimpleTransmission</type>
@@ -522,7 +519,6 @@
     <child link="right_inner_knuckle"/>
     <axis xyz="1 0 0"/>
     <limit effort="1000" lower="-0.785398" upper="0.785398" velocity="100.0"/>
-    <mimic joint="finger_joint" multiplier="-1" offset="0"/>
   </joint>
   <transmission name="trans_right_inner_knuckle_joint">
     <type>transmission_interface/SimpleTransmission</type>
@@ -561,7 +557,6 @@
     <child link="right_inner_finger"/>
     <axis xyz="1 0 0"/>
     <limit effort="1000" lower="-0.872665" upper="0.872665" velocity="100.0"/>
-    <mimic joint="finger_joint" multiplier="1" offset="0"/>
   </joint>
     <transmission name="trans_right_inner_finger_joint">
     <type>transmission_interface/SimpleTransmission</type>
